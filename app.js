@@ -10,5 +10,7 @@ mongoose
   .connect(process.env.DATABASE_CONNECTION, {})
   .then(() => {
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+
+    app.use("api/auth/", require("./routes/AuthRoute"));
   })
   .catch((err) => console.log(err));
