@@ -39,25 +39,8 @@ router.post("/loginAYA", (req, res) => {
           user_token = response2.data.token.token;
           res.json({ access_token, user_token });
         });
-      //   axios.post(
-      //     "https://opensandbox.ayainnovation.com/agent/1.0.0/thirdparty/agent/enquiryTransaction",
-      //     {
-      //       //     serviceCode
-      //       // ServiceCode
-      //       // depositorPhone
-      //       // depositorName
-      //       // qrcode
-      //       // amount number
-      //       // externalTransactionId
-      //       // externalAdditionalData
-      //       // currency
-      //     },
-      //     {}
-      //   );
     })
     .catch((err) => console.log(err));
-
-  res.json([]);
 });
 
 module.exports = router;
