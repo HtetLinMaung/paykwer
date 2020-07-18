@@ -19,6 +19,7 @@ mongoose
     });
 
     app.use("/api/auth/", require("./routes/AuthRoute"));
+    app.use("/api/aya/", require("./routes/AyaRoute"));
     app.use((err, req, res, next) => {
       const message = err.message;
       const statusCode = err.statusCode || 500;

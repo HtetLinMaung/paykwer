@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
       next(err);
     }
 
-    res.json(result);
+    res.json({result});
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
