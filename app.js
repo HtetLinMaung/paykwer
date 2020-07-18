@@ -19,6 +19,11 @@ mongoose
     });
 
     app.use("/api/auth/", require("./routes/AuthRoute"));
-    app.use(require("./middlewares/handle-error"));
+    app.use((err, req, res, next) => {
+      const message = err.message;
+      const statusCode = err.statusCode || 500;
+      const data = err.data;
+      res.json({ message, statusCode, data });
+    });
   })
   .catch((err) => console.log(err));

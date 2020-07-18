@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
       next(err);
     }
 
-    res.json();
+    res.json(result);
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
@@ -57,17 +57,20 @@ exports.login = async (req, res, next) => {
     next(error);
   }
   try {
+    console.log(req.body.password);
+    console.log(user.password);
     const isEqual = await bcrypt.compare(req.body.password, user.password);
+    console.log(isEqual);
     if (!isEqual) {
       const error = new Error("Password incorrect");
       error.statusCode = 401;
-      next(error);
+      throw error;
     }
     res.json(user);
   } catch (err) {
-    const error = new Error("Validation failed!");
-    error.statusCode = 422;
-    error.data = errors.array();
-    next(error);
+    if (!err.statusCode) {
+      err.statusCode = 500;
+    }
+    next(err);
   }
 };
