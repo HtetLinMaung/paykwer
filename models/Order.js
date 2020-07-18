@@ -9,9 +9,11 @@ const orderSchema = Schema(
     },
     amount: {
       type: Number,
-      required: true,
-
-
+      required: true
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "users"
     }
   },
   {
