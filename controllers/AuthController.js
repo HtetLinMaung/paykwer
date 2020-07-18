@@ -24,15 +24,19 @@ exports.signup = async (req, res, next) => {
     const result = await user.save();
     let token;
     try {
-      token = jwt.sign({ userId: result._id }, process.env.SECRET, {
-        expiresIn: "1d"
-      });
+      token = jwt.sign(
+        { userId: result._id },
+        "019a4c36da314a84c7c2390c5ff730af7847ad1b0f8d364ae793ee51a8a0e15de85462dd372eb25f8ddb5ef39475931c4107d229ba813e3689571cef8e828e54",
+        {
+          expiresIn: "1d"
+        }
+      );
     } catch (err) {
       err.statusCode = 500;
       next(err);
     }
 
-    res.json({result});
+    res.json({ result });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
