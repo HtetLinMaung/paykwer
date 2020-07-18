@@ -47,25 +47,43 @@ router.post("/loginAYA", (req, res) => {
 });
 
 router.post("/enquiryTransaction", (req, res) => {
-  console.log(req.body.user_token);
-  console.log(req.body.access_token);
-  console.log("under");
-  console.log({
-    serviceCode: "AGENTTRANSFERTONRIC",
-    depositorPhone: req.body.depositorPhone,
-    depositorName: req.body.depositorName,
-    beneficiaryNric: req.body.beneficiaryNric,
-    beneficiaryPhone: req.body.beneficiaryPhone,
-    beneficiaryName: req.body.beneficiaryName,
-    amount: req.body.amount,
-    externalTransactionId: `${v4()}`,
-    externalAdditionalData: req.body.externalAdditionalData,
-    message: req.body.message,
-    currency: req.body.currency
-  });
   axios
     .post(
       "https://opensandbox.ayainnovation.com/agent/1.0.0/thirdparty/agent/enquiryTransaction",
+      qs.stringify({
+        serviceCode: "AGENTTRANSFERTONRIC",
+        depositorPhone: req.body.depositorPhone,
+        depositorName: req.body.depositorName,
+        beneficiaryNric: req.body.beneficiaryNric,
+        beneficiaryPhone: req.body.beneficiaryPhone,
+        beneficiaryName: req.body.beneficiaryName,
+        amount: req.body.amount,
+        externalTransactionId: `${v4()}`,
+        externalAdditionalData: req.body.externalAdditionalData,
+        message: req.body.message,
+        currency: req.body.currency
+      }),
+      {
+        headers: {
+          Authorization: `Bearer ${req.body.user_token}`,
+          Token: `Bearer ${req.body.access_token}`,
+          "Accept-Language": "en",
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }
+    )
+    .then((response) => {
+      res.json(response.data.data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
+});
+
+router.post("/confirmTransaction", (req, res) => {
+  axios
+    .post(
+      "https://opensandbox.ayainnovation.com/agent/1.0.0/thirdparty/agent/confirmTransaction",
       qs.stringify({
         serviceCode: "AGENTTRANSFERTONRIC",
         depositorPhone: req.body.depositorPhone,
