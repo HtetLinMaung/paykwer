@@ -4,11 +4,14 @@ const orderSchema = Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      minlength: 1
     },
     amount: {
       type: Number,
-      required: true
+      required: true,
+
+
     }
   },
   {
