@@ -19,7 +19,7 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.24",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "uuid": "^8.2.0"
   },
   "devDependencies": {
